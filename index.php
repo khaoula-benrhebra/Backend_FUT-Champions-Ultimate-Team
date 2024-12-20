@@ -286,17 +286,7 @@ INNER JOIN nationnality ON player.nationnality_id=nationnality.id ; ";
                                                                 style="display: none;">entrer url
                                                                 image</p>
                                                         </div>
-                                                        <!-- <div class="flex flex-col">
-                                                            <select name="status" id="status"
-                                                                class="p-2 border border-gray-900 rounded-md bg-gray-800 text-white">
-                                                                <option id="ChoisireStatus" value="ChoisireStatus">
-                                                                    Choisissez Le Club
-                                                                </option>
-                                                                <option value="GK">GK (Gardien de but)</option>
-                                                                <option value="LB">LB (Arrière gauche)</option>
-
-                                                            </select>
-                                                        </div> -->
+                                                       
 
                                                         <div class="flex flex-col">
                                                                 <select name="status"
