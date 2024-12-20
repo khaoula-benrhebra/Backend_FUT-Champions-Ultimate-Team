@@ -62,7 +62,7 @@ if (isset($_POST['save'])) {
     }
 
    
-    header("location:index.php");
+    header("location:/FUT-Champions-Web-App/index.php");
     exit;
 }
 ?>

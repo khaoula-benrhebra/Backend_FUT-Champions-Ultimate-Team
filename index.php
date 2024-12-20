@@ -1,10 +1,7 @@
 <?php
-session_start(); ?> 
-<?php 
-   $con=mysqli_connect("localhost","root","","players");
+ $con=mysqli_connect("localhost","root","","players");
+session_start(); ?>
 
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -147,6 +144,8 @@ session_start(); ?>
                     </div>
                     <div class="report-body">
                         <div class="table-wrapper">
+
+
                             <table class="styled-table">
                                 <thead>
                                     <tr>
@@ -156,27 +155,46 @@ session_start(); ?>
                                         <th>Nationality</th>
                                         <th>Club</th>
                                         <th>Status</th>
+                                        <th>Pace</th>
+                                        <th>Shooting</th>
+                                        <th>Passing</th>
+                                        <th>Dribling</th>
+                                        <th>Defending</th>
+                                        <th>Physical</th>
+                                        <th>Modiffier</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>John Doe</td>
-                                        <td><img src="photo.jpg" alt="Photo" class="player-photo"></td>
-                                        <td>Forward</td>
-                                        <td>USA</td>
-                                        <td>Real Madrid</td>
-                                        <td>Active</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jane Smith</td>
-                                        <td><img src="photo2.jpg" alt="Photo" class="player-photo"></td>
-                                        <td>Midfielder</td>
-                                        <td>France</td>
-                                        <td>Barcelona</td>
-                                        <td>Injured</td>
-                                    </tr>
-                                    <!-- Ajoute d'autres lignes ici -->
+                                    <?php
+                                    
+                                    $requete2="SELECT * FROM player 
+INNER JOIN normal_player ON player.id= normal_player.player_id 
+INNER JOIN club ON player.club_id=club.id
+INNER JOIN nationnality ON player.nationnality_id=nationnality.id ; ";
+                                 $query2=mysqli_query($con,$requete2);
+                                    
+                                 while($rows=mysqli_fetch_assoc($query2)){
+                                    echo  "<tr>";
+                                        echo  "<td>".$rows['name']."</td>";
+                                        echo  "<td>".$rows['photo']."</td>";
+                                         echo "<td>".$rows['postion'] ."</td>";
+                                         echo " <td>".$rows['flag']."</td>";
+                                         echo "<td>".$rows['logo']."</td>";
+                                         echo " <td>".$rows['status']."</td>";
+                                         echo " <td>".$rows['pace']."</td>";
+                                         echo " <td>".$rows['shooting']."</td>";
+                                         echo " <td>".$rows['passing']."</td>";
+                                         echo " <td>".$rows['dribbling']."</td>";
+                                         echo " <td>".$rows['defending']."</td>";
+                                         echo " <td>".$rows['physical']."</td>";
+                                        //  echo " <td>"  "</td>";
+                                   echo "  </tr>";
+                                  }
+                                    ?>
                                 </tbody>
+
+
                             </table>
                         </div>
                     </div>
@@ -199,27 +217,46 @@ session_start(); ?>
                                         <th>Nationality</th>
                                         <th>Club</th>
                                         <th>Status</th>
+                                        <th>Diving</th>
+                                        <th>Handling</th>
+                                        <th>Kicking</th>
+                                        <th>Reflexes</th>
+                                        <th>Speed</th>
+                                        <th>Psitioning</th>
                                     </tr>
                                 </thead>
+
+
                                 <tbody>
-                                    <tr>
-                                        <td>John Doe</td>
-                                        <td><img src="photo.jpg" alt="Photo" class="player-photo"></td>
-                                        <td>Forward</td>
-                                        <td>USA</td>
-                                        <td>Real Madrid</td>
-                                        <td>Active</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jane Smith</td>
-                                        <td><img src="photo2.jpg" alt="Photo" class="player-photo"></td>
-                                        <td>Midfielder</td>
-                                        <td>France</td>
-                                        <td>Barcelona</td>
-                                        <td>Injured</td>
-                                    </tr>
-                                    <!-- Ajoute d'autres lignes ici -->
+                                    <?php 
+                                     
+                                   
+                                    $requete1="SELECT * FROM player 
+                                 INNER JOIN gk_player ON player.id= gk_player.player_id 
+                                 INNER JOIN club ON player.club_id=club.id
+                                 INNER JOIN nationnality ON player.nationnality_id=nationnality.id ";
+                                 $query1=mysqli_query($con,$requete1);
+                                 
+                                    while($rows=mysqli_fetch_assoc($query1)){
+                                  echo  "<tr>";
+                                      echo  "<td>".$rows['name']."</td>";
+                                      echo  "<td>".$rows['photo']."</td>";
+                                       echo "<td>".$rows['postion'] ."</td>";
+                                       echo " <td>".$rows['flag']."</td>";
+                                       echo "<td>".$rows['logo']."</td>";
+                                       echo " <td>".$rows['status']."</td>";
+                                       echo " <td>".$rows['diving']."</td>";
+                                       echo " <td>".$rows['handling']."</td>";
+                                       echo " <td>".$rows['kicking']."</td>";
+                                       echo " <td>".$rows['reflexes']."</td>";
+                                       echo " <td>".$rows['speed']."</td>";
+                                       echo " <td>".$rows['positioning']."</td>";
+                                 echo "  </tr>";
+                                }
+                                    ?>
+
                                 </tbody>
+
                             </table>
                             <div id="popup" class="popup">
                                 <div class="popup-content">
@@ -230,8 +267,8 @@ session_start(); ?>
 
                                         <div class="form">
 
-                                            <form class="space-y-6 flex flex-col" id="myForm" action="action/ajout.php"
-                                                method="Post">
+                                            <form class="space-y-6 flex flex-col" id="myForm"
+                                                action="/FUT-Champions-Web-App/action/ajout.php" method="Post">
 
                                                 <div id="general-Inf">
                                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -243,20 +280,36 @@ session_start(); ?>
                                                             nom valide !</p>
                                                         <div class="flex flex-col items-center gap-2">
 
-                                                            <input type="file" placeholder="Joueur" name="joueur"
+                                                            <input type="text" placeholder="Joueur" name="joueur"
                                                                 class="p-2 border border-gray-300 rounded-md bg-gray-800 text-white">
                                                             <p class="error-msg text-red-500 text-sm font-semibold mt-1"
                                                                 style="display: none;">entrer url
                                                                 image</p>
                                                         </div>
+                                                        <!-- <div class="flex flex-col">
+                                                            <select name="status" id="status"
+                                                                class="p-2 border border-gray-900 rounded-md bg-gray-800 text-white">
+                                                                <option id="ChoisireStatus" value="ChoisireStatus">
+                                                                    Choisissez Le Club
+                                                                </option>
+                                                                <option value="GK">GK (Gardien de but)</option>
+                                                                <option value="LB">LB (Arrière gauche)</option>
+
+                                                            </select>
+                                                        </div> -->
+
                                                         <div class="flex flex-col">
-                                                                <select name="status" id="status"
+                                                                <select name="status"
+                                                                    id="status"
                                                                     class="p-2 border border-gray-900 rounded-md bg-gray-800 text-white">
-                                                                    <option id="ChoisireStatus" value="ChoisireStatus">
-                                                                        Choisissez Le Club
+                                                                    <option id="ChoisireStatus"
+                                                                        value="ChoisireStatus">
+                                                                        Choisissez Le Status
                                                                     </option>
-                                                                    <option value="GK">GK (Gardien de but)</option>
-                                                                    <option value="LB">LB (Arrière gauche)</option>
+                                                                    <option value="reserve">Reserve</option>
+                                                                    <option value="on filed">On the field</option>
+                                                                    
+                                                                   
                                                                     
                                                                 </select>
                                                             </div>
@@ -301,14 +354,11 @@ session_start(); ?>
                                                                     <option value="LB">LB (Arrière gauche)</option>
                                                                     <option value="CB">CB (Défenseur central)</option>
                                                                     <option value="RB">RB (Arrière droit)</option>
-                                                                    <option value="CM">CM (Milieu central)</option>
-                                                                    <option value="LW">LW (Ailier gauche)</option>
-                                                                    <option value="ST">ST (Attaquant)</option>
-                                                                    <option value="RW">RW (Ailier droit)</option>
+                                                                    
                                                                 </select>
                                                             </div>
 
-                                                            <input type="file" placeholder="Nationalité"
+                                                            <input type="text" placeholder="Nationalité"
                                                                 name="nationaliteFlag"
                                                                 class="p-2 border border-gray-300 rounded-md bg-gray-800 text-white">
                                                             <p class="error-msg text-red-500 text-sm font-semibold mt-1"
@@ -336,7 +386,7 @@ session_start(); ?>
                                                                     <option value="RW">RW (Ailier droit)</option>
                                                                 </select>
                                                             </div>
-                                                            <input type="file" placeholder="Club" name="clubLogo"
+                                                            <input type="text" placeholder="Club" name="clubLogo"
                                                                 class="p-2 border border-gray-300 rounded-md bg-gray-800 text-white">
                                                             <p class="error-msg text-red-500 text-sm font-semibold mt-1"
                                                                 style="display: none;">entrer url
